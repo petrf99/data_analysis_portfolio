@@ -1,25 +1,34 @@
-# data_analysis_portfolio
+# Data Analysis Portfolio
 Portfolio project on Data Analysis (SQL, Python, ML, Tableau)
 
-## Project is based on the ecommerce data provided by Olist:
-https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce?resource=download
+## **Project Overview**
+This project is based on **ecommerce data** provided by Olist:  
+🔗 [Olist Brazilian E-Commerce Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce?resource=download)
 
-## In the project you can find several folders:
-1. sql_queries -- here you can find sql_queries, mostly related to data preparation.  
-2. notebooks -- Jupyter notebooks containing the whole process.  
-3. data -- csv tables, downloaded from Kaggle.  
-4. tableau -- Tableau visualization of results.  
+## **Project Structure**
+The repository consists of the following folders:
+1. **`sql_queries/`** – SQL queries, mainly for data preparation.
+2. **`notebooks/`** – Jupyter notebooks with the full analysis process.
+3. **`data/`** – CSV files downloaded from Kaggle.
+4. **`tableau/`** – Tableau visualizations of the results.
 
-## Project description
+---
 
-### The first goal of the project was to discover the data and get some insights (see "Data analysis.ipynb" for details). 
-Here we discovered that the current estimation of the order delivery time made by Olist is very inaccurate, can lead to bad customers' reviews.
+## **Project Description**
 
-### The second goal was to improve this prediction using some standart ML algorithms ("ML. Linear & Boosting.ipynb", "ML. Neural Networks.ipynb")
-For data preparation and feature extraction/analysis see "Dataset preparation.ipynb", "Feature Analysis.ipynb".  
-The best model performance was achieved by Neural Network with the following structure:   
-    
-'''
+### **1️⃣ Data Exploration & Insights**
+The first goal of the project was to explore the dataset and extract insights. See **"Data analysis.ipynb"** for details.  
+We found that Olist's current **order delivery time estimation is highly inaccurate**, which can negatively impact customer reviews.
+
+### **2️⃣ Improving Delivery Time Prediction (ML Models)**
+To improve the delivery time prediction, we applied standard **Machine Learning algorithms**. See:
+- **Dataset preparation & feature analysis** → `Dataset preparation.ipynb`, `Feature Analysis.ipynb`
+- **ML Models** → `ML. Linear & Boosting.ipynb`, `ML. Neural Networks.ipynb`
+
+#### **Best Model Performance: Neural Network**
+The highest accuracy was achieved using a **Neural Network** with the following architecture:
+
+```python
 keras.Sequential([
     layers.Dense(256, input_shape=(X_train.shape[1],)),
     layers.LeakyReLU(alpha=0.1),
@@ -40,17 +49,34 @@ keras.Sequential([
     layers.LeakyReLU(alpha=0.1),
     layers.BatchNormalization(),
 
-    layers.Dense(1)]) # output layer
-'''
+    layers.Dense(1)  # Output layer
+])
+```
 
-Final metrics (MAE, RMSE calculated in days):  
-''' 
+#### **Final Metrics (in days):**
+```
 MAE: 4.3880  
-MSE: 44.3887    
-RMSE: 6.6625 
-R² Score (log space): 0.4369
-'''
+MSE: 44.3887  
+RMSE: 6.6625  
+R² Score (log space): 0.4369  
+```
 
-### Final analysis of the results can be found in "Score analysis.ipynb" and in "tableau" folder. 
-The main conclusion is that even though we didn't manage to increase accuracy on the problematic set (where bad customers' reviews and long baseline delays took place), overall accuracy increased significantly (for 3-days window our model is ~2 times more accurate than the baseline).   
-Howewer, one could use mean value of baseline and our NN score to better address the problem of bad reviews.
+### **3️⃣ Final Analysis & Conclusions**
+Final results and insights are documented in:
+- **`Score analysis.ipynb`** (Jupyter Notebook)
+- **`tableau/`** (Tableau visualizations)
+
+#### **Key Findings:**
+✅ The model significantly improved overall prediction accuracy.  
+✅ For a **3-day prediction window**, our model is **~2× more accurate than the baseline**.  
+⚠️ However, **it did not improve accuracy** for problematic cases where **bad reviews and long delays** occurred.  
+
+📌 **Potential Improvement:** Combining the **baseline estimate and our NN predictions** could help better mitigate negative customer experiences.
+
+---
+
+### **Next Steps**
+- Experiment with **more advanced ML models** (e.g., Transformers, LSTMs).
+- Investigate **customer review sentiment analysis** for further insights.
+- Optimize the **business impact** of predictions (e.g., adjusting delivery estimates dynamically).
+

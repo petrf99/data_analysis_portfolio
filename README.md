@@ -17,7 +17,9 @@ Here we discovered that the current estimation of the order delivery time made b
 
 ### The second goal was to improve this prediction using some standart ML algorithms ("ML. Linear & Boosting.ipynb", "ML. Neural Networks.ipynb")
 For data preparation and feature extraction/analysis see "Dataset preparation.ipynb", "Feature Analysis.ipynb".  
-The best model performance was achieved by Neural Network with the following structure:
+The best model performance was achieved by Neural Network with the following structure:   
+    
+'''
 keras.Sequential([
     layers.Dense(256, input_shape=(X_train.shape[1],)),
     layers.LeakyReLU(alpha=0.1),
@@ -38,13 +40,16 @@ keras.Sequential([
     layers.LeakyReLU(alpha=0.1),
     layers.BatchNormalization(),
 
-    layers.Dense(1)])
+    layers.Dense(1)]) # output layer
+'''
 
-Final metrics (MAE, RMSE calculated in days):   
+Final metrics (MAE, RMSE calculated in days):  
+''' 
 MAE: 4.3880  
 MSE: 44.3887    
 RMSE: 6.6625 
 R² Score (log space): 0.4369
+'''
 
 ### Final analysis of the results can be found in "Score analysis.ipynb" and in "tableau" folder. 
 The main conclusion is that even though we didn't manage to increase accuracy on the problematic set (where bad customers' reviews and long baseline delays took place), overall accuracy increased significantly (for 3-days window our model is ~2 times more accurate than the baseline).   
